@@ -24,6 +24,13 @@ class UsersController < ApplicationController
   # POST /users/1/follow/2
   def follow
     target = User.find(params[:target_id])
+
+    if @user.followers.include? target
+      render status: 422
+
+      return
+    end
+
     @user.follow(target)
 
     render json: target
