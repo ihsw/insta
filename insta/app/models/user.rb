@@ -10,4 +10,8 @@ class User < ApplicationRecord
   def follow(target)
     users << target
   end
+
+  def unfollow(target)
+    users.delete target
+  end
 end

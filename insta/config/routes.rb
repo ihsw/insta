@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :users
     get '/users/:id/followers', to: 'users#followers'
     post '/users/:id/follow/:target_id', to: 'users#follow'
+    post '/users/:id/unfollow/:target_id', to: 'users#unfollow'
   end
 end
