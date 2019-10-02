@@ -25,11 +25,7 @@ class UsersController < ApplicationController
   def follow
     target = User.find(params[:target_id])
 
-    if @user.followers.include? target
-      render status: 422
-
-      return
-    end
+    return render status: 422 if @user.followers.include? target
 
     @user.follow(target)
 
