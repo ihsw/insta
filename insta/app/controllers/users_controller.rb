@@ -35,6 +35,9 @@ class UsersController < ApplicationController
   # POST /users/1/unfollow/2
   def unfollow
     target = User.find(params[:target_id])
+
+    return render status: 422 unless @user.followers.include? target
+
     @user.unfollow(target)
 
     render json: @user
