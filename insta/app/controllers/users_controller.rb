@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
+  before_action :set_user, only: %i[show followers follow update destroy]
 
   # GET /users
   def index
@@ -11,6 +11,22 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     render json: @user
+  end
+
+  # GET /users/1/followers
+  def followers
+    out = @user
+    followers = out.followers
+
+    render json: followers
+  end
+
+  # POST /users/1/follow/2
+  def follow
+    target = User.find(params[:target_id])
+    @user.follow(target)
+
+    render json: target
   end
 
   # POST /users
